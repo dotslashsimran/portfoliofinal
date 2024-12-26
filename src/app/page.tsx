@@ -1,11 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function Portfolio() {
-  // Word-switching logic for Hero Section
-  const words = ["Software Engineer", "Learner", "Problem Solver", "Innovator"];
+  const words = useMemo(
+    () => ["Software Engineer", "Learner", "Problem Solver", "Innovator"],
+    []
+  );
   const [currentWord, setCurrentWord] = useState(words[0]);
 
   useEffect(() => {
@@ -18,18 +21,20 @@ export default function Portfolio() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [words]);
 
-  // Simulated photo data
-  const travelPhotos = [
-    "/photos/1.jpg",
-    "/photos/2.jpg",
-    "/photos/3.jpg",
-    "/photos/4.jpg",
-    "/photos/5.jpg",
-    "/photos/6.jpg",
-  ];
-  const [visiblePhotos, setVisiblePhotos] = useState([]);
+  const travelPhotos = useMemo(
+    () => [
+      "/photos/1.jpg",
+      "/photos/2.jpg",
+      "/photos/3.jpg",
+      "/photos/4.jpg",
+      "/photos/5.jpg",
+      "/photos/6.jpg",
+    ],
+    []
+  );
+  const [visiblePhotos, setVisiblePhotos] = useState<string[]>([]);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -43,66 +48,93 @@ export default function Portfolio() {
     }, 800);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [travelPhotos]);
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Header/Nav */}
+      {/* Navigation Bar */}
       <nav className="fixed w-full bg-white border-b border-gray-200 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Not sure what to write here</h1>
+          <h1 className="text-2xl font-bold">Simran&apos;s Portfolio</h1>
           <div className="flex gap-6">
-            <a href="https://medium.com/@dotslashsimran" className="hover:text-gray-600">BLOG</a>
-            <a href="#" className="hover:text-gray-600">PODCAST</a>
-            <a href="#" className="hover:text-gray-600">YOUTUBE</a>
+            <a
+              href="https://medium.com/@dotslashsimran"
+              className="hover:text-gray-600"
+              aria-label="Blog"
+            >
+              BLOG
+            </a>
+            <a href="#" className="hover:text-gray-600" aria-label="Podcast">
+              PODCAST
+            </a>
+            <a href="#" className="hover:text-gray-600" aria-label="YouTube">
+              YOUTUBE
+            </a>
           </div>
         </div>
       </nav>
 
-{/* Hero Section */}
-<section className="min-h-screen flex flex-col lg:flex-row justify-center items-center px-8 py-16 bg-gray-50">
-  <div className="max-w-6xl mx-auto flex flex-col items-center lg:items-start lg:w-1/2 space-y-6">
-    {/* Main Heading */}
-    <h1 className="text-6xl font-extrabold mb-4 text-center lg:text-left leading-tight text-gray-900">
-      Hi, I'm <span className="text-gray-800 underline decoration-pink-300">Simran Sachdeva</span>.
-    </h1>
-
-    {/* Subheading */}
-    <h3 className="text-3xl text-center lg:text-left text-gray-600 font-medium">
-      A Passionate{" "}
-      <span className="font-semibold text-gray-800">{currentWord}</span>.
-    </h3>
-
-    {/* Description */}
-    <p className="text-lg text-center lg:text-left text-gray-700 max-w-lg leading-relaxed">
-      I specialize in building scalable software solutions, designing seamless user experiences, 
-      and solving complex technical challenges through clean, efficient code.
-    </p>
-
-    {/* Social Links */}
-    <div className="flex gap-6 justify-center lg:justify-start mt-4">
-      <a href="https://github.com/dotslashsimran" target="_blank" rel="noopener noreferrer">
-        <Github className="cursor-pointer hover:scale-110 transition-transform duration-200 text-gray-800" size={28} />
-      </a>
-      <a href="linkedin.com/in/simran-sachdeva-b88258222/" target="_blank" rel="noopener noreferrer">
-        <Linkedin className="cursor-pointer hover:scale-110 transition-transform duration-200 text-blue-500" size={28} />
-      </a>
-      <a href="mailto:dotslashsimran@gmail.com">
-        <Mail className="cursor-pointer hover:scale-110 transition-transform duration-200 text-red-400" size={28} />
-      </a>
-    </div>
-  </div>
-
-  {/* Hero Image */}
-  <div className="lg:w-1/2 flex justify-center mt-10 lg:mt-0">
-    <img
-      src="/photos/hero.svg"
-      alt="Hero"
-      className="w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg transition-shadow duration-300"
-    />
-  </div>
-</section>
-
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col lg:flex-row justify-center items-center px-8 py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto flex flex-col items-center lg:items-start lg:w-1/2 space-y-6">
+          <h1 className="text-6xl font-extrabold mb-4 text-center lg:text-left leading-tight text-gray-900">
+            Hi, I&apos;m{" "}
+            <span className="text-gray-800 underline decoration-pink-300">
+              Simran Sachdeva
+            </span>
+            .
+          </h1>
+          <h3 className="text-3xl text-center lg:text-left text-gray-600 font-medium">
+            A Passionate{" "}
+            <span className="font-semibold text-gray-800">{currentWord}</span>.
+          </h3>
+          <p className="text-lg text-center lg:text-left text-gray-700 max-w-lg leading-relaxed">
+            I specialize in building scalable software solutions, designing
+            seamless user experiences, and solving complex technical challenges
+            through clean, efficient code.
+          </p>
+          <div className="flex gap-6 justify-center lg:justify-start mt-4">
+            <a
+              href="https://github.com/dotslashsimran"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+            >
+              <Github
+                className="cursor-pointer hover:scale-110 transition-transform duration-200 text-gray-800"
+                size={28}
+              />
+            </a>
+            <a
+              href="https://linkedin.com/in/simran-sachdeva-b88258222/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin
+                className="cursor-pointer hover:scale-110 transition-transform duration-200 text-blue-500"
+                size={28}
+              />
+            </a>
+            <a
+              href="mailto:dotslashsimran@gmail.com"
+              aria-label="Email Simran"
+            >
+              <Mail
+                className="cursor-pointer hover:scale-110 transition-transform duration-200 text-red-400"
+                size={28}
+              />
+            </a>
+          </div>
+        </div>
+        <div className="lg:w-1/2 flex justify-center mt-10 lg:mt-0">
+          <img
+            src="/photos/hero.svg"
+            alt="Hero illustration"
+            className="w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg transition-shadow duration-300"
+          />
+        </div>
+      </section>
 
 {/* About Section */}
 <section id="about" className="min-h-screen flex items-center bg-white text-gray-800 px-4 py-16">
@@ -220,69 +252,31 @@ export default function Portfolio() {
   </div>
 </section>
 
-      {/* Photos Section */}
-      <section
+{/* Travel Photos Section */}
+<section
   id="photos"
   className="relative min-h-screen flex items-center justify-center bg-gray-50 text-black px-4 overflow-hidden"
 >
-  {/* Text Content */}
   <div className="z-10 text-center">
     <h1 className="text-6xl md:text-6xl font-extrabold mb-4">
       I also love to travel and take (semi-cool) photos.
     </h1>
   </div>
-
-  {/* Background Photos */}
-  <div className="absolute inset-0 z-0 grid grid-cols-3 grid-rows-2 gap-6 p-12 md:p-20">
-    {visiblePhotos.map((photo, index) => {
-      // Positioning logic
-      const positions = [
-        { top: '5%', left: '10%' },
-        { top: '15%', left: '60%' },
-        { top: '50%', left: '30%' },
-        { top: '70%', left: '15%' },
-        { top: '65%', left: '75%' },
-        { top: '35%', left: '80%' }
-      ];
-
-      return (
-        <div
-          key={index}
-          className="absolute w-32 h-32 md:w-48 md:h-48 opacity-70 hover:opacity-100 transform transition-all duration-700 ease-out hover:scale-105"
-          style={{
-            top: positions[index].top,
-            left: positions[index].left,
-            transform: `rotate(${(index * 15) - 30}deg)`,
-            animation: `fadeInBackground 1.5s ease-out ${index * 0.3}s forwards`
-          }}
-        >
-          <img
-            src={photo}
-            alt={`Travel photo ${index + 1}`}
-            className="w-full h-full object-cover rounded-xl shadow-lg"
-          />
-        </div>
-      );
-    })}
+  <div className="absolute inset-0 z-0 grid grid-cols-3 gap-6 p-12 md:p-20">
+    {travelPhotos.map((photo, index) => (
+      <div
+        key={photo}
+        className="relative w-32 h-32 md:w-48 md:h-48 opacity-70 hover:opacity-100 transform hover:scale-105"
+      >
+        <img
+          src={photo}
+          alt={`Travel photo ${index + 1}`}
+          className="w-full h-full object-cover rounded-xl shadow-lg"
+        />
+      </div>
+    ))}
   </div>
-
-  {/* Optional Styling for Animation */}
-  <style>
-    {`
-      @keyframes fadeInBackground {
-        0% {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    `}
-  </style>
 </section>
-
 {/* Rickroll Section */}
 <section className="min-h-screen flex items-center justify-center bg-gray-900">
   <div className="relative w-full max-w-6xl h-[90vh]">
