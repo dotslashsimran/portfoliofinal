@@ -34,21 +34,6 @@ export default function Portfolio() {
     ],
     []
   );
-  const [visiblePhotos, setVisiblePhotos] = useState<string[]>([]);
-
-  useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex < travelPhotos.length) {
-        setVisiblePhotos((prev) => [...prev, travelPhotos[currentIndex]]);
-        currentIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 800);
-
-    return () => clearInterval(interval);
-  }, [travelPhotos]);
 
   return (
     <main className="min-h-screen bg-white">
@@ -147,7 +132,7 @@ export default function Portfolio() {
           I am a <span className="font-semibold text-gray-900">Developer</span> with a passion for building AI solutions that solve real-world challenges. My primary expertise lies in <span className="font-semibold">generative adversarial networks (GANs)</span> and <span className="font-semibold">large language models</span>, and I thrive on deploying scalable ML models to production environments.
         </p>
         <p className="text-base leading-relaxed text-gray-600">
-          My focus is on delivering end-to-end AI systems that bring measurable business value. Learning by the day. I've also recently started experimenting with <span className="font-semibold">Figma</span> and building <span className="font-semibold">React</span> apps. As you can clearly see with this website.
+          My focus is on delivering end-to-end AI systems that bring measurable business value. Learning by the day. I&apos;ve also recently started experimenting with <span className="font-semibold">Figma</span> and building <span className="font-semibold">React</span> apps. As you can clearly see with this website.
         </p>
       </div>
 
